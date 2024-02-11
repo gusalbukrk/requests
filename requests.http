@@ -1,0 +1,37 @@
+GET http://161.35.239.203/boca/team/run.php HTTP/1.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Connection: keep-alive
+Cookie: biscoitobocabombonera=1707613220-83e8b2c8217c8d95dd22c3752acadc42a35a1dc10fcc9a181590008a3dfc0d32; PHPSESSID=j7345eov8p7f3qp89f0g8aftqp
+DNT: 1
+Host: 161.35.239.203
+Referer: http://161.35.239.203/boca/index.php?name=team1&password=4b1ec717607904ca26465cf85e375721dfaa0f08c9fa10ae2f0cd57f786a855a
+Upgrade-Insecure-Requests: 1
+
+###
+
+@phpsessid = v983mshv4qvovl4nmnbp3ge2qa
+@biscoitobocabombonera = 1707613399-18ae8d2eae8e07029dbc6d7e357dc31948fc0aea8e0d96e50a7092cc9bc04a35
+
+###
+
+# js_myhash(js_myhash(password)+PHPSESSID);
+# to get PHPSESSID, try to hit the server with the url below and see inside computeHASH function, in the line in which passHASH variable is set
+// OR get it in the file
+// /home/gusalbukrk/.rest-client/cookie.json
+// or set vscode rest client option rest-client.previewOption to exchange
+// if option rememberCookiesForSubsequentRequests is set to true
+// cookies will be automatically sent and shown in the header
+GET http://161.35.239.203/boca/index.php?name=team1&password=b66c87abc0fb005b07ef52ca6d966fec81332d7234558a18d73486601d1073c9
+Cookie: biscoitobocabombonera={{biscoitobocabombonera}}; PHPSESSID={{phpsessid}}
+
+###
+
+GET http://161.35.239.203/boca/team/run.php
+Cookie: biscoitobocabombonera={{biscoitobocabombonera}}; PHPSESSID={{phpsessid}}
+
+###
+
+GET http://161.35.239.203/boca/team/problem.php
+Cookie: biscoitobocabombonera={{biscoitobocabombonera}}; PHPSESSID={{phpsessid}}
