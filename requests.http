@@ -1,3 +1,7 @@
+GET http://161.35.239.203/boca
+
+###
+
 GET http://161.35.239.203/boca/team/run.php HTTP/1.1
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
 Accept-Encoding: gzip, deflate
