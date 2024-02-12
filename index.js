@@ -21,8 +21,8 @@ import { JSDOM } from 'jsdom';
 // then comment the code above and uncomment the code below
 // in the future, will store the cookies in a file and read from it
 const cookies = {
-  'PHPSESSID': 's3l7k5qh5pasbqn1gcqardrkh9',
-  'biscoitobocabombonera': '1707746500-538f2c14128106c7a28d16ef66d8f86a191557c9b59f234293eb5c752c2d6a48',
+  'PHPSESSID': '1r97j20f88jg4103tltm50aang',
+  'biscoitobocabombonera': '1707764131-d791d93d486a9cb13b6a8c88dd2b579b16cfc17cd4b49cb4e9b7bdf36b7e7fdb',
 };
 //
 const html = await (await fetch('http://161.35.239.203/boca/team/problem.php', {
@@ -32,5 +32,10 @@ const html = await (await fetch('http://161.35.239.203/boca/team/problem.php', {
 })).text();
 // console.log(html);
 
-const { document } = (new JSDOM(html)).window;
+const { document } = (new JSDOM(html, { url: 'http://161.35.239.203' })).window;
+
+document.querySelectorAll("table:nth-of-type(3) img").forEach(img => {
+  img.src = img.src;
+});
+
 console.log(document.querySelector("table:nth-of-type(3)").outerHTML);
