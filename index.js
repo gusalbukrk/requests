@@ -10,7 +10,6 @@
 // const hashedPassword = sha256(sha256('pass').toString() + cookies['PHPSESSID']).toString();
 // //
 // const login = await fetch(`http://161.35.239.203/boca/index.php?name=team1&password=${hashedPassword}`, {
-//   credentials: 'include',
 //   headers: {
 //     cookie: `PHPSESSID=${cookies['PHPSESSID']}; biscoitobocabombonera=${cookies['biscoitobocabombonera']}`,
 //   },
@@ -25,7 +24,6 @@ const cookies = {
 };
 //
 const html = await (await fetch('http://161.35.239.203/boca/team/problem.php', {
-  credentials: 'include',
   headers: {
     cookie: `PHPSESSID=${cookies['PHPSESSID']}; biscoitobocabombonera=${cookies['biscoitobocabombonera']}`,
   },
