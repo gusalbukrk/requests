@@ -2,32 +2,13 @@ GET http://161.35.239.203/boca
 
 ###
 
-GET http://161.35.239.203/boca/team/run.php HTTP/1.1
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Connection: keep-alive
-Cookie: biscoitobocabombonera=1707613220-83e8b2c8217c8d95dd22c3752acadc42a35a1dc10fcc9a181590008a3dfc0d32; PHPSESSID=j7345eov8p7f3qp89f0g8aftqp
-DNT: 1
-Host: 161.35.239.203
-Referer: http://161.35.239.203/boca/index.php?name=team1&password=4b1ec717607904ca26465cf85e375721dfaa0f08c9fa10ae2f0cd57f786a855a
-Upgrade-Insecure-Requests: 1
+@phpsessid = m6epdpc2bc0jgjucc21pft4sgr
+@biscoitobocabombonera = 1707837464-09b322c1d9720d8e6b7e98e18b946e8c268747281525cf60f9aad18b148c64df
 
 ###
 
-@phpsessid = v983mshv4qvovl4nmnbp3ge2qa
-@biscoitobocabombonera = 1707613399-18ae8d2eae8e07029dbc6d7e357dc31948fc0aea8e0d96e50a7092cc9bc04a35
-
-###
-
-# js_myhash(js_myhash(password)+PHPSESSID);
-# to get PHPSESSID, try to hit the server with the url below and see inside computeHASH function, in the line in which passHASH variable is set
-// OR get it in the file
-// /home/gusalbukrk/.rest-client/cookie.json
-// or set vscode rest client option rest-client.previewOption to exchange
-// if option rememberCookiesForSubsequentRequests is set to true
-// cookies will be automatically sent and shown in the header
-GET http://161.35.239.203/boca/index.php?name=team1&password=b66c87abc0fb005b07ef52ca6d966fec81332d7234558a18d73486601d1073c9
+# NOTE: password URL parameter = js_myhash(js_myhash(password)+PHPSESSID);
+GET http://161.35.239.203/boca/index.php?name=team1&password=8e5ff00f19599f49cd3f35e1eaa27fe31c1fdb94da2699be2949fd7399c96f70
 Cookie: biscoitobocabombonera={{biscoitobocabombonera}}; PHPSESSID={{phpsessid}}
 
 ###
@@ -39,3 +20,41 @@ Cookie: biscoitobocabombonera={{biscoitobocabombonera}}; PHPSESSID={{phpsessid}}
 
 GET http://161.35.239.203/boca/team/problem.php
 Cookie: biscoitobocabombonera={{biscoitobocabombonera}}; PHPSESSID={{phpsessid}}
+
+###
+
+# https://stackoverflow.com/a/20321259
+# boundary is a user-defined string used to separate the parts of a multipart request
+# in the request body, the boundary should always be preceded by two hyphens
+# and the last boundary should also be followed by two hyphens;
+# you can submit a form in the browser with the Dev Tools open and then look at the
+# Network tab to see the POST request that was sent in both parsed and source format
+# in Chrome, a boundary looks like this: ----WebKitFormBoundarymKMwtSgaUDMWOUVw
+# which means, and used in request body, it should be: ------WebKitFormBoundarymKMwtSgaUDMWOUVw
+#
+POST http://161.35.239.203/boca/team/run.php
+Cookie: biscoitobocabombonera={{biscoitobocabombonera}}; PHPSESSID={{phpsessid}}
+Content-Type: multipart/form-data; boundary=XXX
+
+--XXX
+Content-Disposition: form-data; name="confirmation"
+
+confirm
+--XXX
+Content-Disposition: form-data; name="problem"
+
+1
+--XXX
+Content-Disposition: form-data; name="language"
+
+1
+--XXX
+Content-Disposition: form-data; name="sourcefile"; filename="A.c"
+Content-Type: text/x-csrc
+
+< ./A.c
+--XXX
+Content-Disposition: form-data; name="Submit"
+
+Send
+--XXX--
