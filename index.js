@@ -1,7 +1,8 @@
+import { readFileSync } from 'node:fs';
 import jsdom, { JSDOM } from 'jsdom';
 import sha256 from 'crypto-js/sha256.js';
 
-const savedCookies = '{"version":"tough-cookie@4.1.3","storeType":"MemoryCookieStore","rejectPublicSuffixes":false,"enableLooseMode":true,"allowSpecialUseDomain":true,"prefixSecurity":"silent","cookies":[{"key":"PHPSESSID","value":"9mgu85fj2bpfen2qrnb8irgeon","domain":"161.35.239.203","path":"/","hostOnly":true,"creation":"2024-02-12T23:44:21.117Z","lastAccessed":"2024-02-12T23:44:21.117Z"},{"key":"biscoitobocabombonera","value":"1707781460-6a2faeb5709144652d5358d32a402596bb36f20cc87391f0001c4cc40e4b89ea","expires":"2024-02-22T23:44:20.000Z","maxAge":864000,"domain":"161.35.239.203","path":"/boca","hostOnly":true,"pathIsDefault":true,"creation":"2024-02-12T23:44:21.118Z","lastAccessed":"2024-02-12T23:44:21.118Z"}]}';
+const savedCookies = '{"version":"tough-cookie@4.1.3","storeType":"MemoryCookieStore","rejectPublicSuffixes":false,"enableLooseMode":true,"allowSpecialUseDomain":true,"prefixSecurity":"silent","cookies":[{"key":"PHPSESSID","value":"q6dbmsrfpcb0rmilhvj1mbcd5q","domain":"161.35.239.203","path":"/","hostOnly":true,"creation":"2024-02-13T16:49:12.412Z","lastAccessed":"2024-02-13T16:49:12.412Z"},{"key":"biscoitobocabombonera","value":"1707842952-d912544e9311f24ab0f37e7bbb388277e876f3f1b9eb88ddef600272ff0a9720","expires":"2024-02-23T16:49:12.000Z","maxAge":864000,"domain":"161.35.239.203","path":"/boca","hostOnly":true,"pathIsDefault":true,"creation":"2024-02-13T16:49:12.414Z","lastAccessed":"2024-02-13T16:49:12.414Z"}]}';
 
 // if not logged: create new cookie jar, print it to console (it must then be pasted savedCookies variable)
 // if already logged: generate cookie jar from savedCookies variable
@@ -51,6 +52,32 @@ async function getCookieJar() {
 }
 
 const cookieJar = await getCookieJar();
+const cookieStr = cookieJar.getCookieStringSync('http://161.35.239.203', { allPaths: true });
 
-const problemPage = await JSDOM.fromURL(`http://161.35.239.203/boca/team/problem.php`, { cookieJar });
-console.log(problemPage.window.document.documentElement.outerHTML);
+// const problemPage = await JSDOM.fromURL(`http://161.35.239.203/boca/team/problem.php`, { cookieJar });
+// console.log(problemPage.window.document.documentElement.outerHTML);
+
+const headers = new Headers();
+headers.append("Cookie", cookieStr);
+//
+// NOTE: mustn't set `Content-Type` header
+// (e.g. `headers.append("Content-Type", "multipart/form-data")`)
+// FormData will include it automatically together with an appropriate boundary
+// https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest_API/Using_FormData_Objects
+// https://flaviocopes.com/fix-formdata-multipart-fetch/
+// https://muffinman.io/blog/uploading-files-using-fetch-multipart-form-data/
+
+const body = new FormData();
+body.append('confirmation', 'confirm');
+body.append('problem', '1');
+body.append('language', '1');
+body.append('sourcefile', new Blob([ readFileSync('./A.c', { encoding: 'utf8', flag: 'r' }) ], { type: 'text/x-csrc' }), 'A.c');
+body.append('Submit', 'Send');
+
+const res = await fetch('http://161.35.239.203/boca/team/run.php', {
+  method: 'POST',
+  body,
+  headers,
+});
+
+console.log("RAW BODY:", await res.text());

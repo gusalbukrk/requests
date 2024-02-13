@@ -2,13 +2,13 @@ GET http://161.35.239.203/boca
 
 ###
 
-@phpsessid = m6epdpc2bc0jgjucc21pft4sgr
-@biscoitobocabombonera = 1707837464-09b322c1d9720d8e6b7e98e18b946e8c268747281525cf60f9aad18b148c64df
+@phpsessid = h6qfs9do9qlt546vtiuiumh03a
+@biscoitobocabombonera = 1707842275-b1928f09f3ebd3a017c26cbb0344923525c6e0cdeae57a3f1a6b7f61ca3f4a45
 
 ###
 
 # NOTE: password URL parameter = js_myhash(js_myhash(password)+PHPSESSID);
-GET http://161.35.239.203/boca/index.php?name=team1&password=8e5ff00f19599f49cd3f35e1eaa27fe31c1fdb94da2699be2949fd7399c96f70
+GET http://161.35.239.203/boca/index.php?name=team1&password=d6b15ff81b44917b3c6b190958da7385bfd077c5f98c99618f1920b21f16425f
 Cookie: biscoitobocabombonera={{biscoitobocabombonera}}; PHPSESSID={{phpsessid}}
 
 ###
